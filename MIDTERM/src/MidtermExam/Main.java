@@ -8,21 +8,16 @@ public class Main {
         Scanner s = new Scanner(System.in);
         Random r = new Random();
 
-        // Instantiate the player deck
         CardStack playerDeck = new CardStack();
         String[] cardNames = {"Spade", "Club", "Heart", "Diamond"};
 
-        // Add Cards to the deck
         for (int i = 0; i < 30; i++)
             playerDeck.push(new Card(cardNames[r.nextInt(4)], (r.nextInt(14) + 1)));
 
-        // Instantiate the discarded pile
         CardStack discardedStack = new CardStack();
 
-        // Initialize the round
         int round = 1;
 
-        // Game will play until player deck is empty
         while (!playerDeck.isEmpty()) {
             System.out.println("Round: " + round);
             System.out.println();
@@ -34,9 +29,7 @@ public class Main {
 
             System.out.println();
 
-            // Randomized chosen command
             int action = (discardedStack.isEmpty()) ? r.nextInt(2) : r.nextInt(3);
-            // Randomized number of cards for command (1-5)
             int numCards = r.nextInt(5) + 1;
 
             switch (action) {
@@ -45,7 +38,6 @@ public class Main {
                         numCards = r.nextInt(playerDeck.countCards()) + 1;
                     System.out.println("The player drew " + numCards + " cards.");
 
-                    // Loop for drawing cards
                     for (int i = 0; i < numCards; i++)
                         playerDeck.push(new Card(cardNames[r.nextInt(4)], (r.nextInt(14) + 1)));
                     break;
@@ -54,7 +46,6 @@ public class Main {
                         numCards = r.nextInt(playerDeck.countCards()) + 1;
                     System.out.println("The player discarded " + numCards + " cards.");
 
-                    // Loop for discarding cards
                     for (int i = 0; i < numCards; i++)
                         discardedStack.push(playerDeck.pop());
                     break;
@@ -63,7 +54,6 @@ public class Main {
                         numCards = r.nextInt(discardedStack.countCards()) + 1;
                     System.out.println("The player got " + numCards + " cards from the discarded pile.");
 
-                    // Loop for getting cards from the discarded pile
                     for (int i = 0; i < numCards; i++)
                         playerDeck.push(discardedStack.pop());
             }
@@ -72,7 +62,6 @@ public class Main {
             System.out.println("GAME INFO");
             System.out.println("Current Player Deck:");
 
-            // Print Player Deck
             playerDeck.printStack();
 
             System.out.println();
@@ -83,7 +72,6 @@ public class Main {
 
             s.nextLine();
 
-            // Increment round
             round++;
         }
 
